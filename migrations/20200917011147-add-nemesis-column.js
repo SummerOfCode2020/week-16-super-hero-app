@@ -9,14 +9,21 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-    await queryInterface.addColumn("heroes", "snapped", {
-      type: Sequelize.BOOLEAN,
-      defaultValue: false,
+    await queryInterface.addColumn("heroes", "nemesis", {
+      type: Sequelize.STRING
     });
 
-    return models.heroes.bulkCreate([{ slug: "spider-man", snapped: true }], {
-      updateOnDuplicate: ["snapped"],
-    });
+    return models.heroes.bulkCreate(
+      [
+        { slug: "spider-man", nemesis: "Wilson Fisk" },
+        { slug: "captain-america", nemesis: "Red Skull" },
+        { slug: "iron-man", nemesis: "Obadiah Stane" },
+        { slug: "thor", nemesis: "Loki" },
+      ],
+      {
+        updateOnDuplicate: ["nemesis"],
+      }
+    );
   },
 
   down: (queryInterface) => {
@@ -27,6 +34,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.removeColumn("heroes", "snapped");
+    return queryInterface.removeColumn("heroes", "nemesis");
   },
 };

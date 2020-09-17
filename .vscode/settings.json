@@ -22,6 +22,18 @@
             "port": 3306,
             "previewLimit": 50,
             "server": "localhost"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "askForPassword": true,
+            "driver": "MySQL",
+            "name": "heroku",
+            "connectString": "mysql://b1b6204e10cc4a:ef42a233@us-cdbr-east-02.cleardb.com/heroku_200db3188ed14b8"
         }
     ]
 }

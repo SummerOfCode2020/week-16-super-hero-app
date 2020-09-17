@@ -22,7 +22,7 @@ app.post('/', bodyParser.json(), saveNewHero)
 
 
 app.get('/debug-the-db', (request, response) => {
-  response.send(connection.query(""))
+  response.send(connection.query(''))
 })
 
 

@@ -16,7 +16,7 @@ module.exports = {
     return queryInterface.addColumn({ nemesis: values })
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface) => {
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

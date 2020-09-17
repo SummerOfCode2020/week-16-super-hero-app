@@ -1,5 +1,7 @@
 'use strict'
 
+const { values } = require('../heroes')
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     /*
@@ -11,8 +13,7 @@ module.exports = {
     */
     await queryInterface.addColumn('heroes', 'nemesis', { type: Sequelize.STRING })
 
-    return queryInterface.addColumn('heroes',
-      'nemesis', Sequelize.STRING)
+    return queryInterface.addColumn({ nemesis: values })
   },
 
   down: (queryInterface, Sequelize) => {
@@ -23,6 +24,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.removeColumn('nemesis')
+    return queryInterface.removeColumn('heroes', 'nemesis')
   }
 }

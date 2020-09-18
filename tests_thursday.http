@@ -19,6 +19,16 @@ content-type: application/json
 
 ### Add goose-the-cat
 
+POST http://localhost:3009/
+content-type: application/json
+
+{
+    "name": "Goose The Cat",
+    "realname": "Chewie",
+    "firstappearance": "tbd",
+    "slug": "goose-the-cat"
+}
+
 
 ### Filter by slug
 GET http://localhost:3009/goose-the-cat

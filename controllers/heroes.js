@@ -1,4 +1,5 @@
 const models = require('../models')
+const { Op } = require('sequelize')
 
 const getAllHeroes = async (request, response) => {
   const heroes = await models.heroes.findAll()
@@ -6,11 +7,18 @@ const getAllHeroes = async (request, response) => {
   return response.send(heroes)
 }
 
-const getHeroBySlug = async (request, response) => {
+const getHero = async (request, response) => {
   try {
-    const { slug } = request.params
+    const { urlValue } = request.params
 
-    const foundHero = await models.heroes.findOne({ where: { slug } })
+    const foundHero = await models.heroes.findOne({
+      where: {
+        [Op.or]: {
+          slug: urlValue,
+          id: urlValue
+        }
+      }
+    })
 
     return foundHero
       ? response.send(foundHero)
@@ -20,10 +28,13 @@ const getHeroBySlug = async (request, response) => {
   }
 }
 
-const saveNewHero = async (request, response) => {
-  const { name, realname, firstappearance, slug } = request.body
 
-  if (!name || !realname || !firstappearance || !slug) {
+const saveNewHero = async (request, response) => {
+  const {
+    name, realname, firstappearance, slug, nemesis
+  } = request.body
+
+  if (!name || !realname || !firstappearance || !slug || !nemesis) {
     return request.status(400).send('The following fields are required: name, realname, firstappearance, slug')
   }
 
@@ -32,4 +43,4 @@ const saveNewHero = async (request, response) => {
   return response.status(201).send(newHero)
 }
 
-module.exports = { getAllHeroes, getHeroBySlug, saveNewHero }
+module.exports = { getAllHeroes, getHero, saveNewHero }

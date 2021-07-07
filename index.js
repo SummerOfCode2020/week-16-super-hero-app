@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const config = require('./config/sequelize')
-const { getAllHeroes, getHeroBySlug, saveNewHero } = require('./controllers/heroes')
+const { getAllHeroes, getHero, saveNewHero } = require('./controllers/heroes')
 
 const app = express()
 
@@ -15,14 +15,14 @@ app.get('/debug-the-config', (request, response) => {
 })
 
 // handler filtering based on value sent in the url
-app.get('/:slug', getHeroBySlug)
+app.get('/:urlValue', getHero)
 
 // add a new record to the database
 app.post('/', bodyParser.json(), saveNewHero)
 
 
 app.get('/debug-the-db', (request, response) => {
-  response.send(connection.query(""))
+  response.send(connection.query(''))
 })
 
 
